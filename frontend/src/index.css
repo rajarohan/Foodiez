@@ -1,0 +1,178 @@
+/* Custom CSS for Foodiez App */
+
+/* Custom hover effects using Bootstrap */
+.hover-shadow:hover {
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.hover-primary:hover {
+  color: var(--bs-primary) !important;
+  transition: color 0.3s ease;
+}
+
+/* Minimum viewport height utilities */
+.min-vh-50 {
+  min-height: 50vh !important;
+}
+
+/* Card hover effects */
+.card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.card:hover {
+  border-color: var(--bs-primary);
+}
+
+/* Custom scrollbar for modern browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bs-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-primary-dark);
+}
+
+/* Loading animation for better UX */
+.spinner-border {
+  animation-duration: 0.75s;
+}
+
+/* Input focus states */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Button hover effects */
+.btn {
+  transition: all 0.3s ease;
+}
+
+/* Navbar enhancements */
+.navbar-brand {
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+/* Custom badge positioning */
+.position-absolute.top-0.start-100 {
+  transform: translate(50%, -50%) !important;
+}
+
+/* Hero section styling */
+.hero-image {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Responsive text utilities */
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .lead {
+    font-size: 1.1rem;
+  }
+}
+
+/* Custom alert styles */
+.alert {
+  border-radius: 0.5rem;
+  border: none;
+}
+
+/* Footer styling */
+footer {
+  margin-top: auto;
+}
+
+/* Custom utility classes */
+.text-light-emphasis {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.text-light-emphasis:hover {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Form group spacing */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Card image hover effect */
+.card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* Loading states */
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Custom dropdown styling */
+.dropdown-menu {
+  border: 1px solid rgba(0, 0, 0, .15);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .175);
+}
+
+.dropdown-item:hover {
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+/* Feature item styling */
+.feature-item {
+  padding: 2rem 1rem;
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .hero-section {
+    padding: 3rem 0;
+  }
+}
