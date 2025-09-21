@@ -69,6 +69,20 @@ export const authAPI = {
       return api.put('/customer/profile', data);
     }
   },
+  updatePassword: (data, role) => {
+    if (role === 'admin') {
+      return api.put('/admin/password', data);
+    } else {
+      return api.put('/customer/password', data);
+    }
+  },
+  deleteAccount: (role) => {
+    if (role === 'admin') {
+      return api.delete('/admin/account');
+    } else {
+      return api.delete('/customer/account');
+    }
+  },
 };
 
 // Admin Auth API (kept for backward compatibility)
@@ -119,6 +133,7 @@ export const orderAPI = {
   cancel: (id) => api.put(`/orders/${id}/cancel`),
   getStats: (params = {}) => api.get('/orders/stats', { params }),
   track: (id) => api.get(`/orders/${id}/track`),
+  reorder: (id) => api.post(`/orders/${id}/reorder`),
 };
 
 // Upload API

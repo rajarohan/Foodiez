@@ -11,7 +11,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProtectedRoute, { AdminRoute, CustomerRoute, GuestRoute } from './components/ProtectedRoute';
 
-// Page Components (to be created)
+// Page Components
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -24,13 +24,10 @@ import OrderDetail from './pages/OrderDetail';
 import Profile from './pages/Profile';
 import Search from './pages/Search';
 import NotFound from './pages/NotFound';
+import Dashboard from './pages/Dashboard';
 
-// Admin Pages (to be created)
-import AdminDashboard from './pages/admin/Dashboard';
-import AdminRestaurants from './pages/admin/Restaurants';
-import AdminMenu from './pages/admin/Menu';
-import AdminOrders from './pages/admin/Orders';
-import AdminProfile from './pages/admin/Profile';
+// Admin Pages
+import AdminPanel from './pages/AdminPanel';
 
 // App Layout Component
 const AppLayout = ({ children }) => (
@@ -172,11 +169,28 @@ function App() {
               </CustomerRoute>
             } />
 
+            {/* Customer Dashboard */}
+            <Route path="/dashboard" element={
+              <CustomerRoute>
+                <AppLayout>
+                  <Dashboard />
+                </AppLayout>
+              </CustomerRoute>
+            } />
+
             {/* Admin Only Routes */}
+            <Route path="/admin" element={
+              <AdminRoute>
+                <AppLayout>
+                  <AdminPanel />
+                </AppLayout>
+              </AdminRoute>
+            } />
+            
             <Route path="/admin/dashboard" element={
               <AdminRoute>
                 <AppLayout>
-                  <AdminDashboard />
+                  <AdminPanel />
                 </AppLayout>
               </AdminRoute>
             } />
@@ -184,7 +198,7 @@ function App() {
             <Route path="/admin/restaurants" element={
               <AdminRoute>
                 <AppLayout>
-                  <AdminRestaurants />
+                  <AdminPanel />
                 </AppLayout>
               </AdminRoute>
             } />
@@ -192,7 +206,7 @@ function App() {
             <Route path="/admin/menu" element={
               <AdminRoute>
                 <AppLayout>
-                  <AdminMenu />
+                  <AdminPanel />
                 </AppLayout>
               </AdminRoute>
             } />
@@ -200,7 +214,7 @@ function App() {
             <Route path="/admin/orders" element={
               <AdminRoute>
                 <AppLayout>
-                  <AdminOrders />
+                  <AdminPanel />
                 </AppLayout>
               </AdminRoute>
             } />
@@ -208,7 +222,23 @@ function App() {
             <Route path="/admin/profile" element={
               <AdminRoute>
                 <AppLayout>
-                  <AdminProfile />
+                  <AdminPanel />
+                </AppLayout>
+              </AdminRoute>
+            } />
+
+            <Route path="/admin/users" element={
+              <AdminRoute>
+                <AppLayout>
+                  <AdminPanel />
+                </AppLayout>
+              </AdminRoute>
+            } />
+
+            <Route path="/admin/analytics" element={
+              <AdminRoute>
+                <AppLayout>
+                  <AdminPanel />
                 </AppLayout>
               </AdminRoute>
             } />

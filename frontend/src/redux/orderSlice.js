@@ -114,6 +114,18 @@ export const trackOrder = createAsyncThunk(
   }
 );
 
+export const reorderItems = createAsyncThunk(
+  'orders/reorderItems',
+  async (orderId, { rejectWithValue }) => {
+    try {
+      const response = await orderAPI.reorder(orderId);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to reorder items');
+    }
+  }
+);
+
 // Order slice
 const orderSlice = createSlice({
   name: 'orders',
@@ -272,6 +284,20 @@ const orderSlice = createSlice({
         state.currentOrder = action.payload.data;
       })
       .addCase(trackOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      // Reorder Items
+      .addCase(reorderItems.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(reorderItems.fulfilled, (state) => {
+        state.isLoading = false;
+        // The reordered items are typically added to cart, not orders
+        // This just acknowledges successful reordering
+      })
+      .addCase(reorderItems.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

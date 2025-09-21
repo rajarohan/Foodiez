@@ -66,6 +66,32 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
+export const updatePassword = createAsyncThunk(
+  'auth/updatePassword',
+  async (passwordData, { rejectWithValue, getState }) => {
+    try {
+      const { userRole } = getState().auth;
+      const response = await authAPI.updatePassword(passwordData, userRole);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to update password');
+    }
+  }
+);
+
+export const deleteAccount = createAsyncThunk(
+  'auth/deleteAccount',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const { userRole } = getState().auth;
+      const response = await authAPI.deleteAccount(userRole);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to delete account');
+    }
+  }
+);
+
 export const loadUser = createAsyncThunk(
   'auth/loadUser',
   async (_, { rejectWithValue }) => {
@@ -175,6 +201,37 @@ const authSlice = createSlice({
         state.user = action.payload.data;
       })
       .addCase(updateProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      // Update Password
+      .addCase(updatePassword.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updatePassword.fulfilled, (state) => {
+        state.isLoading = false;
+        // Password update doesn't change user data
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      // Delete Account
+      .addCase(deleteAccount.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteAccount.fulfilled, (state) => {
+        state.isLoading = false;
+        state.user = null;
+        state.token = null;
+        state.userRole = null;
+        state.isAuthenticated = false;
+        localStorage.removeItem('token');
+        localStorage.removeItem('userRole');
+      })
+      .addCase(deleteAccount.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
